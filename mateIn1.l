@@ -19,37 +19,46 @@
    # Res )
 
 # NIL - white
-(chess~setup 3 NIL (fen "8/8/8/P6p/8/2RnkN2/r7/3K4"))
-(if (apply yourMove (splitMoves "f3e1"))
-   (println 'move (myMove))
-   (println 'Boom)
-   (quit) )
+# (chess~setup 3 NIL (fen "8/8/8/P6p/8/2RnkN2/r7/3K4"))
+# (if (apply yourMove (splitMoves "f3e1"))
+   # (let (M (myMove)  P2 (splitMoves "a2d2"))
+      # (println 'M M 'P2 P2 (list (cadr M) (cddr M)))
+      # (test (list (cadr M) (cddr M)) P2)
+   # )
+   # (println 'Boom)
+   # (quit) )
 # 
 # (chess~setup 3 T (fen "5r1k/Q6p/1pb3p1/4q3/4p3/1BP2p1P/PP4P1/5RK1"))
 # (if (yourMove 'f3 'g2)
    # (println 'move (myMove))
    # (quit "Boom") )
 
-
-# (in '(bash -c "xzcat mateIn1.xz | head -100")
-   # (until (eof)
-      # (let
-         # (F (read)
-            # C (read)
-            # P1 (splitMoves (read))
-            # P2 (splitMoves (read)) )
-         # (line) # Guard
-         # # (println F  C P1 P2)
-         # (chess~setup 3 (= 'b C) (fen F))
-         # (if (apply yourMove P1)
-            # (println (myMove) P2)
-            # (println F (= "w" C) P1 P2)
-            # (quit "boom")
-         # )
-      # )
-   # )
-# )
-
+(let Cnt 0
+   (in '(bash -c "xzcat mateIn1.xz | head -50")
+      (until (eof)
+         (let
+            (F (read)
+               C (read)
+               P1 (splitMoves (read))
+               P2 (splitMoves (read)) )
+            (line) # EOF guard
+            # (println F  C P1 P2)
+            (chess~setup 3 (= 'b C) (fen F))
+            (if (apply yourMove P1)
+               (let (M (myMove)  X (list (cadr M) (cddr M)))
+                  (test
+                     T
+                     (or
+                        (= (cadr X) (cadr P2))
+                        (= X P2) ) ) )
+               (println F C P1 P2)
+               (quit "Boom!")
+            )
+            (println (inc 'Cnt))
+         )
+      )
+   )
+)
 
 (msg 'ok)
 (bye)
