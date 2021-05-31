@@ -5,7 +5,7 @@
 (symbols 'chess 'simul 'pico)
 
 ### Fields/Board ###
-#(local) (*Board *Straight *Diagonal *DiaStraight *Moved *Pinned)
+(local) (*Board *Straight *Diagonal *DiaStraight *Moved *Pinned)
 
 # x y color piece whAtt blAtt
 (setq *Board (grid 8 8))
