@@ -31,6 +31,6 @@
                      (inc 'C) ) ) ) ) ) ) )
 (de splitMoves (Str)
    (let S (chop Str)
-      (list
+      (cons
          (intern (pack (head 2 S)))
          (intern (pack (head 2 (tail -2 S)))) ) ) )
