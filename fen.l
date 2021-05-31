@@ -17,7 +17,7 @@
 (de fen (Lst)
    (let (R 8  C 97)
       (make
-         (for L Lst
+         (for L (chop Lst)
             (cond
                ((= "/" L) (dec 'R) (set 'C 97))
                ((format L) (inc 'C @))
@@ -29,3 +29,8 @@
                            (list Color Piece)
                            (if Flg (cons Flg)) ) )
                      (inc 'C) ) ) ) ) ) ) )
+(de splitMoves (Str)
+   (let S (chop Str)
+      (list
+         (intern (pack (head 2 S)))
+         (intern (pack (head 2 (tail -2 S)))) ) ) )
