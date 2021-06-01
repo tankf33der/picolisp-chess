@@ -49,8 +49,9 @@
                   (test
                      T
                      (or
+                        (= X P2)
                         (= (cadr X) (cadr P2))
-                        (= X P2) ) ) )
+                        (= (car X) (car P2)) ) ) )
                (println F C P1 P2)
                (quit "Boom!")
             )
