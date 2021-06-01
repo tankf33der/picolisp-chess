@@ -48,12 +48,11 @@
                (let (M (myMove)  X (list (cadr M) (cddr M)))
                   (test
                      T
-                     (or
-                        (find = X P2)
-                        # (= X P2)
-                        # (= (cadr X) (cadr P2))
-                        # (= (car X) (car P2))
-                        (bool (inCheck *You)) ) ) )
+                     (bool
+                        (or
+                           (= X P2)
+                           (find = X P2)
+                           (inCheck *You) ) ) ) )
                (println F C P1 P2)
                (quit "Boom!")
             )
