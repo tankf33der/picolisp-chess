@@ -34,7 +34,7 @@
    # (quit "Boom") )
 
 (let Cnt 0
-   (in '(bash -c "xzcat mateIn1.xz | head -256")
+   (in '(bash -c "xzcat mateIn1.xz | head -1024")
       (until (eof)
          (let
             (F (read)
