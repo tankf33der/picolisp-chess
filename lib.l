@@ -1,4 +1,4 @@
-# 23dec20 Software Lab. Alexander Burger
+# 01jun21 Software Lab. Alexander Burger
 
 (load "@lib/simul.l")
 
@@ -529,7 +529,8 @@
    (if Init
       (for L Init
          (with (piece (cadr L) 0 (car L))
-            (unless (caddr L)
+            (if (caddr L)
+               (=: cnt 0)
                (=: cnt 1)
                (push '*Moved This) ) ) )
       (mapc
