@@ -21,13 +21,24 @@
          (chop Str) )
       L ) )
 (de -moved? (A)
+   # XXX, fixme, too much
    (cond
       ((or
             (and (= R 2) (= A "P"))
             (and (= R 7) (= A "p")) )
          T )
-      ((and (= A "K") (gt0 (car Cast))) T)
-      ((and (= A "k") (gt0 (caddr Cast))) T)
+      ((and
+            (= A "K")
+            (or
+               (gt0 (car Cast))
+               (gt0 (cadr Cast)) ) )
+         T )
+      ((and
+            (= A "k")
+            (or
+               (gt0 (caddr Cast))
+               (gt0 (cadddr Cast)) ) )
+         T )
       ((and
             (= A "R")
             (= R 1)
@@ -54,6 +65,7 @@
          T ) ) )
 (de fen (Lst Cast)
    (let (R 8  C 97  Cast (cast-count Cast))
+      (println Lst Cast)
       (make
          (for L (chop Lst)
             (cond
