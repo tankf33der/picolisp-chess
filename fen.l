@@ -65,7 +65,6 @@
          T ) ) )
 (de fen (Lst Cast)
    (let (R 8  C 97  Cast (cast-count Cast))
-      (println Lst Cast)
       (make
          (for L (chop Lst)
             (cond
