@@ -1,20 +1,7 @@
 ```
-5934
-5935
-5936
-((bool (or (= X P2) (find = X P2) (inCheck *You))))
-T -- 'test' failed
-? F
--> rnq1k1nr/ppp1bpP1/8/5P2/8/5p1P/PP1P4/RNBQKBNR
-? Cast
--> KQkq
-? P1
--> (g7 h8)
-? P2
--> (e7 h4)
-? X
--> (e8 f8)
-? (inCheck *You)
--> NIL
-? 
+10988
+10989
+10990
+3rkb1r/1pp1pppp/p1n5/5b2/3P4/1BPqBN2/PP1Q1PPP/R3K2R w KQk (e1 c1 NIL) (d3 b1 NIL)
+Boom!
 ```
