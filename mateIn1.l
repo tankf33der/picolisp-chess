@@ -12,7 +12,7 @@
                P1 (splitMoves (read))
                P2 (splitMoves (read)) )
             (line) # EOF guard
-            (chess~setup 3 (= 'b Color) (fen F Cast))
+            (chess~setup 1 (= 'b Color) (fen F Cast))
             (if (apply yourMove P1)
                (let (M (myMove)  X (list (cadr M) (cddr M)))
                   (test
