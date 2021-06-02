@@ -84,4 +84,4 @@
          (link
             (intern (pack (head 2 S)))
             (intern (pack (head 2 (tail -2 S)))) )
-         (when (cdddr S) (link (piece? (get S 5)))) ) ) )
+         (when (cddddr S) (link (piece? (get S 5)))) ) ) )

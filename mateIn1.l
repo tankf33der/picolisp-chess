@@ -39,7 +39,7 @@
 # (bye)
 
 (let Cnt 0
-   (in '(bash -c "xzcat mateIn1.xz")
+   (in '(xzcat mateIn1.xz)
       (until (eof)
          (let
             (F (read)
