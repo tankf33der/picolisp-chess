@@ -9,10 +9,17 @@
       (("q" "Q") '+Queen)
       (("b" "B") '+Bishop) ) )
 (de cast-count (Str)
-   (let Str (chop Str)
-      (cons
-         (cnt upp? Str)
-         (cnt low? Str) ) ) )
+   # bit list K Q k q
+   (let L (need 4 0)
+      (mapc
+         '((C)
+            (cond
+               ((= C "K") (set L 1))
+               ((= C "Q") (set (cdr L) 1))
+               ((= C "k") (set (cddr L) 1))
+               ((= C "q") (set (cdddr L) 1)) ) )
+         (chop Str) )
+      L ) )
 (de -moved? (A)
    (cond
       ((or
@@ -20,7 +27,31 @@
             (and (= R 7) (= A "p")) )
          T )
       ((and (= A "K") (gt0 (car Cast))) T)
-      ((and (= A "k") (gt0 (cdr Cast))) T) ) )
+      ((and (= A "k") (gt0 (caddr Cast))) T)
+      ((and
+            (= A "R")
+            (= R 1)
+            (= C 97)
+            (=1 (cadr Cast)) ) 
+         T )
+      ((and
+            (= A "R")
+            (= R 1)
+            (= C 104)
+            (=1 (car Cast)) )
+         T )
+      ((and
+            (= A "r")
+            (= R 8)
+            (= C 97)
+            (=1 (cadddr Cast)) )
+         T )
+      ((and
+            (= A "r")
+            (= R 8)
+            (= C 104)
+            (=1 (caddr Cast)) )
+         T ) ) )
 (de fen (Lst Cast)
    (let (R 8  C 97  Cast (cast-count Cast))
       (make
