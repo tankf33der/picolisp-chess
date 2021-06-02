@@ -80,6 +80,8 @@
                      (inc 'C) ) ) ) ) ) ) )
 (de splitMoves (Str)
    (let S (chop Str)
-      (list
-         (intern (pack (head 2 S)))
-         (intern (pack (head 2 (tail -2 S)))) ) ) )
+      (make
+         (link
+            (intern (pack (head 2 S)))
+            (intern (pack (head 2 (tail -2 S)))) )
+         (when (cdddr S) (link (piece? (get S 5)))) ) ) )
