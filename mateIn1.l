@@ -1,4 +1,4 @@
-(load "lib.l")
+(load "engine.l")       # Official former lib.l
 (symbols '(chess simul pico))
 
 (load "fen.l")
