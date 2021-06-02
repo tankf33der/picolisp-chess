@@ -8,14 +8,21 @@
       (("r" "R") '+Rook)
       (("q" "Q") '+Queen)
       (("b" "B") '+Bishop) ) )
+(de cast-count (Str)
+   (let Str (chop Str)
+      (cons
+         (cnt upp? Str)
+         (cnt low? Str) ) ) )
 (de -moved? (A)
-   (when
-      (or
-         (and (= R 2) (= A "P"))
-         (and (= R 7) (= A "p")) )
-      @ ) )
-(de fen (Lst)
-   (let (R 8  C 97)
+   (cond
+      ((or
+            (and (= R 2) (= A "P"))
+            (and (= R 7) (= A "p")) )
+         T )
+      ((and (= A "K") (gt0 (car Cast))) T)
+      ((and (= A "k") (gt0 (cdr Cast))) T) ) )
+(de fen (Lst Cast)
+   (let (R 8  C 97  Cast (cast-count Cast))
       (make
          (for L (chop Lst)
             (cond

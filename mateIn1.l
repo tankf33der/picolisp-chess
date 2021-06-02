@@ -1,6 +1,5 @@
 (load "engine.l")       # Official former lib.l
 (symbols '(chess simul pico))
-
 (load "fen.l")
 
 # (dm (img> . +White) ()
@@ -38,12 +37,13 @@
       (until (eof)
          (let
             (F (read)
-               C (read)
+               Color (read)
+               Cast (read)
                P1 (splitMoves (read))
                P2 (splitMoves (read)) )
             (line) # EOF guard
-            # (println F  C P1 P2)
-            (chess~setup 3 (= 'b C) (fen F))
+            # (println F Color Cast P1 P2)
+            (chess~setup 3 (= 'b Color) (fen F Cast))
             (if (apply yourMove P1)
                (let (M (myMove)  X (list (cadr M) (cddr M)))
                   (test
