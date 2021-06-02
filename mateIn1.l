@@ -2,6 +2,9 @@
 (symbols '(chess simul pico))
 (load "fen.l")
 
+(println (fen "7k/3rN2p/7P/p1pp3n/5pP1/5R2/PPP5/2K5" "-"))
+(bye)
+
 (let Cnt 0
    (in '(bash -c "xzcat mateIn1.xz")
       (until (eof)
