@@ -3,7 +3,7 @@
 (load "fen.l")
 
 # This loop stay in this form for history purposes,
-# mateIn2 and later will use different logic.
+# mateIn2 and later will use different logic for youMove vs. myMove pair.
 (let Cnt 0
    (in '(xzcat mateIn1.xz)
       (until (eof)
