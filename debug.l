@@ -9,7 +9,7 @@
 
 (load "fen.l")
 
-(println (fen "r1b1r1k1/1p4pp/8/2p2pq1/3ppPP1/P6P/1BPPQ3/R4RK1" "-"))
+(println (fen "4r1k1/5ppp/r1p5/p1n1RP2/8/2P2N1P/2P3P1/3R2K1" "-"))
 (bye)
 
 

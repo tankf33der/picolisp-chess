@@ -6,16 +6,22 @@
    (println F Color Cast Moves)
    (quit "Boom!") )
 (let Cnt 0
-   (in '(bash -c "xzcat mateIn2.xz | head -3")
+   (in '(bash -c "xzcat mateIn2.xz | head -20")
       (until (eof)
-         (let (F (read)  Color (read)  Cast (read)  Moves (read-moves)  Flg)
+         (let
+            (F (read)
+               Color (read)
+               Cast (read)
+               Moves (read-moves)
+               Flg )
             (line T) # EOF guard
+            (println 'new Color Moves)
             (chess~setup 3 (== 'b Color) (fen F Cast))
-            (for M Moves
+            (apply yourMove (car Moves))
+            (for M (cdr Moves)
+               (println M (myMove))
+               (xchg '*Me '*You)
             )               
-            # 
-            # (println F Moves)
-            # (println (apply yourMove (car Moves)))
          )
       )
    )
