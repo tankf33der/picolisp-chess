@@ -30,3 +30,13 @@
 )
 (msg 'ok)
 (bye)
+
+# : (show (; 'd4 piece))
+# "BlackKing" (+Black +King)
+   # cnt 2
+   # field d4
+   # attacks (c4 e4 d3 d5 c3 c5 e3 e5)
+   # ahead ((This) (: 0 -1 1))
+   # color
+# -> "BlackKing"
+# :
