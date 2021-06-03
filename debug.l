@@ -8,6 +8,11 @@
 # <copy-paste>
 
 (load "fen.l")
+
+(println (fen "r1b1r1k1/1p4pp/8/2p2pq1/3ppPP1/P6P/1BPPQ3/R4RK1" "-"))
+(bye)
+
+
 (in '(bash -c "xzcat mateIn1.xz | head -3")
    (until (eof)
       (let

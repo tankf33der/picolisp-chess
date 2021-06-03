@@ -1,7 +1,7 @@
 # pil filter-csv.l > mateIn1
 # xz -f mateIn1
 # note: cut en-passant puzzles
-(in "../mate2"
+(in "../mate1"
    (until (eof)
       (from ",")
       (let
@@ -9,7 +9,7 @@
             Color (read)
             Cast (read)
             Passant (read) )
-         (when (= Passant "-")
+         (unless (= Passant "-")
             (from ",")
             (prinl
                Fen 
