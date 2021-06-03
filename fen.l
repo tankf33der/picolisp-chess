@@ -20,6 +20,10 @@
                ((= C "q") (set (cdddr L) 1)) ) )
          (chop Str) )
       L ) )
+(de read-moves ()
+   (make
+      (until (eol)
+         (link (splitMoves (read))) ) ) )
 (de -moved? (A)
    # XXX, fixme, too much
    (cond
