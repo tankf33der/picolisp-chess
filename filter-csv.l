@@ -9,7 +9,7 @@
             Color (read)
             Cast (read)
             Passant (read) )
-         (unless (= Passant "-")
+         (when (= Passant "-")
             (from ",")
             (prinl
                Fen 
