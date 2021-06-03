@@ -332,8 +332,8 @@
          (and
             (== Pce (car *Moved))
             (=1 (; Pce cnt))
+            (memq (; Fld2 y) (4 5))
             (isa '+Pawn Pce)
-            (n== (: color) (; Pce color))
             (link (list This (cons Pce) (cons This Fld1))) ) ) ) )
 
 (de tryCastle (Fld1 Fld2 Fld3 Att Fld4)
@@ -531,7 +531,7 @@
          (with (piece (cadr L) 0 (car L))
             (if (caddr L)
                (=: cnt 0)
-               (=: cnt 1)
+               (=: cnt 2)
                (push '*Moved This) ) ) )
       (mapc
          '((Cls Lst)
