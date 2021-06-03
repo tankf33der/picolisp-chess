@@ -1,4 +1,4 @@
-# 01jun21 Software Lab. Alexander Burger
+# 03jun21 Software Lab. Alexander Burger
 
 (load "@lib/simul.l")
 
@@ -137,12 +137,14 @@
 
 (dm moves> ()
    (make
-      (unless
-         (or
-            (n0 (: cnt))
-            (get (: field) (if (: color) 'whAtt 'blAtt)) )
-         (tryCastle west T)
-         (tryCastle east) )
+      (when (=0 (: cnt))
+         (if (: color)
+            (unless (; (: field) whAtt)
+               (tryCastle 'd8 'c8 'a8 'whAtt 'b8)
+               (tryCastle 'f8 'g8 'h8 'whAtt) )
+            (unless (; (: field) blAtt)
+               (tryCastle 'd1 'c1 'a1 'blAtt 'b1)
+               (tryCastle 'f1 'g1 'h1 'blAtt) ) ) )
       (try1Move *Straight)
       (try1Move *Diagonal) ) )
 
@@ -248,17 +250,17 @@
 (local) (inCheck pinned)
 
 (de inCheck (Color)
-   (if Color (get *BKPos 'whAtt) (get *WKPos 'blAtt)) )
+   (if Color (; *BKPos whAtt) (; *WKPos blAtt)) )
 
 (de try1Move (Lst)
    (for Dir Lst
       (let? Fld (Dir (: field))
-         (ifn (get Fld 'piece)
+         (ifn (; Fld piece)
             (link (list This (cons This Fld)))
-            (unless (== (: color) (get @ 'color))
+            (unless (== (: color) (; @ color))
                (link
                   (list This
-                     (cons (get Fld 'piece))
+                     (cons (; Fld piece))
                      (cons This Fld) ) ) ) ) ) ) )
 
 (de try1Attack (Lst)
@@ -270,11 +272,11 @@
       (let Fld (: field)
          (loop
             (NIL (setq Fld (Dir Fld)))
-            (T (get Fld 'piece)
-               (unless (== (: color) (get @ 'color))
+            (T (; Fld piece)
+               (unless (== (: color) (; @ color))
                   (link
                      (list This
-                        (cons (get Fld 'piece))
+                        (cons (; Fld piece))
                         (cons This Fld) ) ) ) )
             (link (list This (cons This Fld))) ) ) ) )
 
@@ -287,19 +289,19 @@
                (link Fld)
                (T
                   (and
-                     (setq Pce (get Fld 'piece))
-                     (<> (: color) (get Pce 'color)) ) )
+                     (setq Pce (; Fld piece))
+                     (<> (: color) (; Pce color)) ) )
                (T (== '+Pawn (setq Cls (last (type Pce))))
                   (and
                      Diag
                      (setq Fld2 (Dir Fld))
-                     (= (get Fld2 'y) (get ((get Pce 'ahead) Fld) 'y))
+                     (= (; Fld2 y) (; ((; Pce ahead) Fld) y))
                      (link Fld2) ) )
                (T (memq Cls '(+Knight +Queen +King)))
                (T (and Pce (xor Diag (== Cls '+Bishop)))) ) ) ) ) )
 
 (de tryPawnMove (Fld Flg)
-   (unless (get Fld 'piece)
+   (unless (; Fld piece)
       (if Flg
          (link (list This (cons This Fld)))
          (for Cls '(+Queen +Knight +Rook +Bishop)
@@ -311,42 +313,40 @@
                      Fld ) ) ) ) ) ) )
 
 (de tryPawnCapt (Fld1 Flg Fld2)
-   (if (get Fld1 'piece)
-      (unless (== (: color) (get @ 'color))
+   (if (; Fld1 piece)
+      (unless (== (: color) (; @ color))
          (if Flg
             (link
                (list This
-                  (cons (get Fld1 'piece))
+                  (cons (; Fld1 piece))
                   (cons This Fld1) ) )
             (for Cls '(+Queen +Knight +Rook +Bishop)
                (link
                   (list This
-                     (cons (get Fld1 'piece))
+                     (cons (; Fld1 piece))
                      (cons This)
                      (cons
                         (piece (list (car (type This)) Cls) (: cnt))
                         Fld1 ) ) ) ) ) )
-      (let? Pce (get Fld2 'piece)
+      (let? Pce (; Fld2 piece)
          (and
             (== Pce (car *Moved))
-            (=1 (get Pce 'cnt))
+            (=1 (; Pce cnt))
             (isa '+Pawn Pce)
-            (n== (: color) (get Pce 'color))
+            (n== (: color) (; Pce color))
             (link (list This (cons Pce) (cons This Fld1))) ) ) ) )
 
-(de tryCastle (Dir Long)
-   (use (Fld1 Fld2 Fld Pce)
-      (or
-         (get (setq Fld1 (Dir (: field))) 'piece)
-         (get Fld1 (if (: color) 'whAtt 'blAtt))
-         (get (setq Fld2 (Dir Fld1)  Fld Fld2) 'piece)
-         (when Long
-            (or
-               (get (setq Fld (Dir Fld)) 'piece)
-               (get Fld (if (: color) 'whAtt 'blAtt)) ) )
+(de tryCastle (Fld1 Fld2 Fld3 Att Fld4)
+   (or
+      (; Fld1 piece)
+      (get Fld1 Att)
+      (; Fld2 piece)
+      (get Fld2 Att)
+      (; Fld4 piece)
+      (let Pce (; Fld3 piece)
          (and
-            (== '+Rook (last (type (setq Pce (get (Dir Fld) 'piece)))))
-            (=0 (get Pce 'cnt))
+            (isa '+Rook Pce)
+            (=0 (; Pce cnt))
             (link
                (list This
                   (cons This)
@@ -360,16 +360,16 @@
       (and
          (loop
             (NIL (setq Fld (Dir Fld)))
-            (T (setq Pce (get Fld 'piece))
+            (T (setq Pce (; Fld piece))
                (and
-                  (= Color (get Pce 'color))
+                  (= Color (; Pce color))
                   (setq L
                      (make
                         (loop
                            (NIL (setq Fld (Dir Fld)))
                            (link Fld)
-                           (T (setq P (get Fld 'piece))) ) ) )
-                  (<> Color (get P 'color))
+                           (T (setq P (; Fld piece))) ) ) )
+                  (<> Color (; P color))
                   (memq (last (type P)) Lst)
                   (cons Pce L) ) ) )
          (link @) ) ) )
@@ -397,7 +397,7 @@
                   (cons Lst
                      (flip
                         (mapcar
-                           '((Mov) (cons (car Mov) (get Mov 1 'field)))
+                           '((Mov) (cons (car Mov) (; Mov 1 field)))
                            (cdr Lst) ) ) ) )
                (moves> Pce) ) )
          (if Color *Black *White) ) ) )
@@ -478,7 +478,7 @@
       (find '((This) (n0 (: cnt))) Lst) ) )
 
 (de bookMove (From To)
-   (let Pce (get From 'piece)
+   (let Pce (; From piece)
       (list 0 (list (list Pce (cons Pce To)) (cons Pce From))) ) )
 
 (de myMove ()
@@ -488,7 +488,7 @@
             ((moved? (if *Me *Black *White))
                (game *Me *Depth moves move cost) )
             (*Me
-               (if (member (get *Moved 1 'field 'x) (1 2 3 5))
+               (if (member (; *Moved 1 field x) (1 2 3 5))
                   (bookMove 'e7 'e5)
                   (bookMove 'd7 'd5) ) )
             ((rand T) (bookMove 'e2 'e4))
@@ -505,7 +505,7 @@
       (find
          '((Mov)
             (and
-               (== (caar Mov) (get From 'piece))
+               (== (caar Mov) (; From piece))
                (== To (pick cdr (cdar Mov)))
                (or
                   (not Cls)
