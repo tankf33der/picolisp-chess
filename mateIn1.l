@@ -27,6 +27,10 @@
          ((== '+ (car Args)) (and *Redo (redo)))
          ((apply yourMove Args) (display T) (myMove)) ) ) )
 
+(println
+   (fen "8/p7/4Q2p/3p2p1/3q2k1/5p2/PP4PK/8" "-") )
+(bye)
+
 # (msg 'start)
 # (chess~setup 1 NIL
    # (fen "rnq1k1nr/ppp1bpP1/8/5P2/8/5p1P/PP1P4/RNBQKBNR" "KQkq"))
