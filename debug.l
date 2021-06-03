@@ -1,3 +1,12 @@
+# NIL - white
+#(chess~main 2 NIL
+#(quote (a8 (+Black +Rook)) (f8 (+White +Knight)) (g8 (+Black +King)) (a7 (+Black +Pawn) T) (b7 (+Black +Pawn) T) (c7 (+Black +Pawn) T) (f7 (+Black +Pawn) T) (g7 (+Black +Pawn) T) (h7 (+Black +Pawn) T) (h6 (+Black +Knight)) (d5 (+Black +Pawn)) (g5 (+Black +Queen)) (b4 (+White +Pawn)) (d4 (+White +Pawn)) (h4 (+Black +Knight)) (a3 (+White +Pawn)) (e3 (+White +Pawn)) (g3 (+Black +Bishop)) (h3 (+White +Pawn)) (b2 (+White +Bishop)) (d2 (+White +Knight)) (f2 (+White +Pawn) T) (a1 (+White +Rook)) (d1 (+White +Queen)) (f1 (+White +Rook)) (g1 (+White +King)))
+#)
+
+# cd pil21
+# pil chess/cli.l -chess~main
+# <copy-paste>
+
 (load "fen.l")
 (in '(bash -c "xzcat mateIn1.xz | head -3")
    (until (eof)

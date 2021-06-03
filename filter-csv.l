@@ -1,6 +1,7 @@
 # pil filter-csv.l > mateIn1
 # xz -f mateIn1
-(in "../mate1"
+# note: cut en-passant puzzles
+(in "../mate2"
    (until (eof)
       (from ",")
       (let
