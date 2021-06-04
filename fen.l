@@ -47,7 +47,7 @@
             (= A "R")
             (= R 1)
             (= C 97)
-            (=1 (cadr Cast)) ) 
+            (=1 (cadr Cast)) )
          T )
       ((and
             (= A "R")

@@ -12,7 +12,7 @@
          (when (= Passant "-")
             (from ",")
             (prinl
-               Fen 
+               Fen
                ","
                Color
                ","
