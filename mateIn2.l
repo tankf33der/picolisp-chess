@@ -5,6 +5,9 @@
 (de boom ()
    (println F Color Cast Moves)
    (quit "Boom!") )
+
+# Leave this loop as is for history
+# This is #G2.
 (let Cnt 0
    (in '(xzcat mateIn2.xz)
       (until (eof)

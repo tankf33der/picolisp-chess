@@ -4,6 +4,7 @@
 
 # This loop stay in this form for history purposes,
 # mateIn2 and later will use different logic for youMove vs. myMove pair.
+# This is #G1.
 (let Cnt 0
    (in '(xzcat mateIn1.xz)
       (until (eof)
