@@ -2,12 +2,24 @@
 (symbols '(chess simul pico))    # https://software-lab.de/chess/README
 (load "fen.l")
 
+# Should be able run any mate line, (1-5).
+# This is #G3.
+
+(de mike ()
+   (println (argv))
+   # (println (opt) (args) (rest))
+   # (msg 'ok)
+   (bye)
+)
+
+(bye)
+
 (de boom ()
    (println F Color Cast Moves)
    (quit "Boom!") )
 
-# Leave this loop as is for history
-# This is #G2.
+# This is #G3.
+#
 (let Cnt 0
    (in '(xzcat mateIn2.xz)
       (until (eof)
