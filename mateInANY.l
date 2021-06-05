@@ -16,9 +16,16 @@
                Cast (read)
                Moves (read-moves) )
             (line T) # EOF guard
-            (chess~setup (cddr Moves) (== 'b Color) (fen F Cast))
+            (chess~setup 5 (== 'b Color) (fen F Cast))
+            # (chess~setup (cddr Moves) (== 'b Color) (fen F Cast))
+            (println F Moves Color *Me *You)
             (apply yourMove (car Moves))
+            (println 'after-your *Me *You)
+
             (do (cadr Moves)
+               (println 'bef-myMove *Me *You)
+               (T (mate *Me))
+
                (NIL (println (myMove)) (boom))
                (xchg '*Me '*You) )
             (xchg '*Me '*You)
