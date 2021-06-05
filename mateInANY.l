@@ -24,8 +24,7 @@
 
             (do (cadr Moves)
                (println 'bef-myMove *Me *You)
-               (T (mate *Me))
-
+               (T (or (mate *Me) (mate *You)))
                (NIL (println (myMove)) (boom))
                (xchg '*Me '*You) )
             (xchg '*Me '*You)
