@@ -14,20 +14,16 @@
             (F (read)
                Color (read)
                Cast (read)
-               Moves (read-moves) )
+               firstMove (splitMoves (read)) )
             (line T) # EOF guard
+            (println F Color Cast firstMove)
             (chess~setup 5 (== 'b Color) (fen F Cast))
-            # (chess~setup (cddr Moves) (== 'b Color) (fen F Cast))
-            (println F Moves Color *Me *You)
-            (apply yourMove (car Moves))
-            (println 'after-your *Me *You)
-
-            (do (cadr Moves)
-               (println 'bef-myMove *Me *You)
-               (T (or (mate *Me) (mate *You)))
-               (NIL (println (myMove)) (boom))
-               (xchg '*Me '*You) )
-            (xchg '*Me '*You)
-            (test T (mate *You)) )
+            (apply yourMove firstMove)
+            (test
+               'mate
+               (loop
+                  (T (or (mate *Me) (mate *You)) 'mate)
+                  (NIL (println (myMove)) (boom))
+                  (xchg '*Me '*You) ) ) )
          (println (inc 'Cnt)) ) ) )
 (bye)
