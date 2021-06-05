@@ -20,7 +20,9 @@
                ((= C "q") (set (cdddr L) 1)) ) )
          (chop Str) )
       L ) )
+
 (de read-moves ()
+   # (FirstMove Count . Depth)
    (let C 0
       (cons
          (splitMoves (read))
@@ -28,7 +30,8 @@
             (until (eol)
                (read)
                (inc 'C) )
-            C ) ) ) )
+            C )
+         (inc (/ (inc C) 2)) ) ) )
 (de -moved? (A)
    # XXX, fixme, too much
    (cond
