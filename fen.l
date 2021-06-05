@@ -21,9 +21,14 @@
          (chop Str) )
       L ) )
 (de read-moves ()
-   (make
-      (until (eol)
-         (link (splitMoves (read))) ) ) )
+   (let C 0
+      (cons
+         (splitMoves (read))
+         (prog
+            (until (eol)
+               (read)
+               (inc 'C) )
+            C ) ) ) )
 (de -moved? (A)
    # XXX, fixme, too much
    (cond
