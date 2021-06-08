@@ -1,4 +1,4 @@
-# 03jun21 Software Lab. Alexander Burger
+# 06jun21 Software Lab. Alexander Burger
 
 (load "@lib/simul.l")
 
@@ -482,23 +482,24 @@
       (list 0 (list (list Pce (cons Pce To)) (cons Pce From))) ) )
 
 (de myMove ()
-   (let? M
-      (cadr
-         (cond
-            ((moved? (if *Me *Black *White))
-               (game *Me *Depth moves move cost) )
-            (*Me
-               (if (member (; *Moved 1 field x) (1 2 3 5))
-                  (bookMove 'e7 'e5)
-                  (bookMove 'd7 'd5) ) )
-            ((rand T) (bookMove 'e2 'e4))
-            (T (bookMove 'd2 'd4)) ) )
-      (move (car (push '*Undo M)))
-      (off *Redo)
-      (cons
-         (caar M)
-         (cdr (asoq (caar M) (cdr M)))
-         (pick cdr (cdar M)) ) ) )
+   (when
+      (cond
+         ((moved? (if *Me *Black *White))
+            (game *Me *Depth moves move cost) )
+         (*Me
+            (if (member (; *Moved 1 field x) (1 2 3 5))
+               (bookMove 'e7 'e5)
+               (bookMove 'd7 'd5) ) )
+         ((rand T) (bookMove 'e2 'e4))
+         (T (bookMove 'd2 'd4)) )
+      (let M (cons (car @) (cadr @))
+         (move (cadr (push '*Undo M)))
+         (off *Redo)
+         (cons
+            (- (car M))
+            (caadr M)
+            (cdr (asoq (caadr M) (cddr M)))
+            (pick cdr (cdadr M)) ) ) ) )
 
 (de yourMove (From To Cls)
    (when
@@ -511,15 +512,15 @@
                   (not Cls)
                   (isa Cls (car (last (car Mov)))) ) ) )
          (moves *You) )
-      (prog1 (car (push '*Undo @))
+      (prog1 (cadr (push '*Undo (cons 0 @)))
          (off *Redo)
          (move @) ) ) )
 
 (de undo ()
-   (move (cdr (push '*Redo (++ *Undo)))) )
+   (move (cddr (push '*Redo (++ *Undo)))) )
 
 (de redo ()
-   (move (car (push '*Undo (++ *Redo)))) )
+   (move (cadr (push '*Undo (++ *Redo)))) )
 
 (de setup (Depth You Init)
    (setq *Depth (or Depth 5)  *You You  *Me (not You))
